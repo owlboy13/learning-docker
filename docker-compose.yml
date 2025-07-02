@@ -1,0 +1,30 @@
+# Define a versão do formato do arquivo docker-compose
+# Versão 3.8 é uma versão estável com bons recursos
+version: '3.8'
+# Seção onde definimos todos os serviços/containers que compõem nossa aplicação
+services:
+  # Nome do serviço (poderia ser qualquer nome, aqui usamos 'app')
+  app:
+    # Indica que a imagem será construída usando o Dockerfile do diretório atual
+    build: .
+    
+    # Define um nome fixo para o container (ao invés do nome aleatório que o Docker gera)
+    container_name: app
+    
+    # Mapeamento de portas: porta_host:porta_container
+    # Expõe a porta 8000 do container na porta 8000 da máquina host
+    ports:
+      - "8000:8000"
+    
+    # Monta um volume para desenvolvimento:
+    # . (diretório atual no host) : /app (diretório no container)
+    # Isso permite que alterações no código sejam refletidas imediatamente sem rebuild
+    volumes:
+      - .:/app
+
+# CORREÇÃO: Há um erro de digitação aqui - deveria ser 'networks' (sem o 'o' depois do 'w')
+netowrks:
+  # Define uma rede chamada 'app-netowrk' (também com erro de digitação)
+  app-netowrk:
+    # Driver de rede do tipo bridge (cria uma rede interna isolada para os containers)
+    driver: bridge
